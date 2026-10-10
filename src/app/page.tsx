@@ -65,7 +65,7 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
-            Kelola Data Sekolah & Akademik <br />
+            Kelola Data Sekolah & Akademik Barudak <br />
             <span className="bg-gradient-to-r from-indigo-400 via-blue-400 to-emerald-400 bg-clip-text text-transparent">
               Lebih Cepat, Rapi, & Modern
             </span>
