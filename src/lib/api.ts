@@ -48,10 +48,8 @@
 
 import axios from 'axios';
 
-// Langsung kunci ke URL Django PythonAnywhere yang benar!
-const API_BASE_URL = process.env.NODE_ENV === 'production'
-  ? 'https://greennus.pythonanywhere.com/api/v1'
-  : (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api/v1');
+// Membaca variabel dari Vercel (atau fallback ke localhost saat dev)
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api/v1';
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -60,7 +58,7 @@ export const api = axios.create({
   },
 });
 
-// Request Interceptor: JWT Token
+// Interceptor Token JWT
 api.interceptors.request.use(
   (config) => {
     if (typeof window !== 'undefined') {
@@ -74,13 +72,14 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response Interceptor: Handling 401
+// Interceptor 401 Unauthorized
 api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401 && typeof window !== 'undefined') {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
+      
       if (window.location.pathname !== '/login') {
         window.location.href = '/login';
       }
