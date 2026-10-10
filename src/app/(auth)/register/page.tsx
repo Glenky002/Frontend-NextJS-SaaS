@@ -47,12 +47,6 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      console.log("API BASE:", api.defaults.baseURL);
-      console.log("API URL:", api.getUri({
-        url: "/auth/register/",
-        method: "post",
-      }));
-
       await api.post("/auth/register/", formData);
       alert('Registrasi Sekolah Berhasil! Silakan Login menggunakan akun admin Anda.');
       router.push('/login');
