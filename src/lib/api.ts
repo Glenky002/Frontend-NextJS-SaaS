@@ -1,9 +1,12 @@
 import axios from 'axios';
 
-// Kita kunci baseURL langsung mengarah ke /api/v1
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL 
-  ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1/`
-  : 'http://127.0.0.1:8000/api/v1/';
+// Langsung ambil URL utuh dari env, fallback ke localhost jika lokal
+// Domain utama dari env + prefix standar Django /api/v1
+const rawBase = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000';
+// Hilangkan trailing slash jika ada
+const cleanBase = rawBase.replace(/\/+$/, ''); 
+
+const API_BASE_URL = `${cleanBase}/api/v1`;
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
