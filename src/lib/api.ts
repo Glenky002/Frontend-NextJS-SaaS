@@ -1,5 +1,3 @@
-
-
 import axios from 'axios';
 
 // Otomatis pakai URL PythonAnywhere saat live di Vercel,
